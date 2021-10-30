@@ -78,26 +78,68 @@ public class Piano extends JPanel {
 	 * Instantiate all the Key objects with their correct polygons and pitches, and
 	 * add them to the _keys array.
 	 */
-	private void makeKeys () {
-		// Just as an example, this draws the left-most black key at its proper position.
-		final int[] xCoords = new int[] {
-			WHITE_KEY_WIDTH - BLACK_KEY_WIDTH/2,
-			WHITE_KEY_WIDTH + BLACK_KEY_WIDTH/2,
-			WHITE_KEY_WIDTH + BLACK_KEY_WIDTH/2,
-			WHITE_KEY_WIDTH - BLACK_KEY_WIDTH/2
-		};
-		final int[] yCoords = new int[] {
-			0,
-			0,
-			BLACK_KEY_HEIGHT,
-			BLACK_KEY_HEIGHT
-		};
-		final Polygon polygon = new Polygon(xCoords, yCoords, xCoords.length);
-		final Key key = new Key(polygon, START_PITCH, this);
+	private void makeKeys (){
+		int X = 0;
+		int startPitch = START_PITCH;
+		for(int counter = 0; counter < 3; counter++){
+			makeOcative(X,startPitch);
+			X += 7  * WHITE_KEY_WIDTH;
+			startPitch += 12;
+		}
+	}
 
-		// Add this key to the list of keys so that it gets painted.
+	/**
+	 * instantiate one Ocative on piano start from given coordinate
+	 * @param startX the int value to be used in makeOcative
+	 * @param startPitch the int value to be used in makeOcative
+	 */
+	private void makeOcative(int startX,int startPitch){
+		System.out.println("ocative placed, start point x: " + startX);
+		int pitch = startPitch;
+		int start = startX;
+		for(int counter = 0; counter < 7; counter++){
+			System.out.println("expected black key palce: " + start);
+			makeKey(start, pitch,true);
+			pitch++;
+			start += WHITE_KEY_WIDTH;
+		}
+		start = startX;
+		for(int counter = 0; counter < 7; counter++){
+			if(counter != 2 && counter != 6){
+				makeKey(start, pitch, false);
+				pitch++;
+			}
+			start += WHITE_KEY_WIDTH;
+		}
+
+	}
+
+	/**
+	 * instinate one single key with given coordinate, pitch and if it's white or not
+	 * @param startX the int value to be used in makeKey
+	 * @param pitch the int value to be used in makeKey
+	 * @param isWhite the boolean valu to be used in makeKey
+	 */
+	private void makeKey(int startX, int pitch, boolean isWhite){
+		int[] x;
+		int[] y;
+		System.out.println("is white?: " + isWhite);
+		if(isWhite){
+			x = new int[]{startX, startX + WHITE_KEY_WIDTH, startX + WHITE_KEY_WIDTH, startX};
+			y = new int[]{0, 0, WHITE_KEY_HEIGHT, WHITE_KEY_HEIGHT};
+			System.out.println("white key: " + x[0] + ' ' + x[1]);
+		}else{
+			x = new int[]{startX + WHITE_KEY_WIDTH - BLACK_KEY_WIDTH/2, startX + WHITE_KEY_WIDTH + BLACK_KEY_WIDTH/2,
+					startX + WHITE_KEY_WIDTH + BLACK_KEY_WIDTH/2, startX + WHITE_KEY_WIDTH - BLACK_KEY_WIDTH/2};
+			y = new int[]{0,0,BLACK_KEY_HEIGHT, BLACK_KEY_HEIGHT};
+			System.out.println("black key: " + x[0] + ' ' + x[1]);
+		}
+		Polygon block = new Polygon(x, y,x.length);
+		Key key = new Key(block,isWhite,pitch,this);
 		_keys.add(key);
 	}
+
+
 
 	// DO NOT MODIFY THIS METHOD.
 	@Override
