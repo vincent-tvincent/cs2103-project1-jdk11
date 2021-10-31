@@ -1,6 +1,4 @@
-import javax.swing.*;
 import java.awt.event.*;
-import javax.sound.midi.*;
 import java.util.*;
 
 /**
@@ -9,7 +7,7 @@ import java.util.*;
 public class PianoMouseListener extends MouseAdapter {
 	// You are free to add more instance variables if you wish.
 	private ArrayList<Key> _keys;
-
+	private Key lastKey;
 	/**
 	 * @param keys the list of keys in the piano.
 	 */
@@ -25,7 +23,16 @@ public class PianoMouseListener extends MouseAdapter {
 	 * of the entire piano, of where the mouse is currently located.
 	 */
 	public void mouseDragged (MouseEvent e) {
+		Key recentKey = getKey(e);
+		if(lastKey != recentKey){
+			if(lastKey != null) {
+				lastKey.play(false);
+			}
+			recentKey.play(true);
+			lastKey = recentKey;
+		}
 	}
+
 
 	// TODO implement this method.
 	@Override
@@ -35,12 +42,10 @@ public class PianoMouseListener extends MouseAdapter {
 	 * of the entire piano, of where the mouse is currently located.
 	 */
 	public void mousePressed (MouseEvent e) {
-		for (Key key : _keys) {
-			if (key.getPolygon().contains(e.getX(), e.getY())) {
-				key.play(true);  // Note that the key should eventually be turned off!
-				System.out.println("This key was pressed: " + key);
-			}
-		}
+		Key key = getKey(e);
+		key.play(true);
+		System.out.println("This key was pressed: " + key);
+		lastKey = key;
 	}
 
 	// TODO implement this method.
@@ -51,5 +56,20 @@ public class PianoMouseListener extends MouseAdapter {
 	 * of the entire piano, of where the mouse is currently located.
 	 */
 	public void mouseReleased (MouseEvent e) {
+		Key key = getKey(e);
+		key.play(false);
+		System.out.println("This key was released: " + key);
+		lastKey = null;
+	}
+	private Key getKey(MouseEvent e){
+		Key key = null;
+		for(Key k: _keys){
+			if(k.getPolygon().contains(e.getX(), e.getY())){
+				key = k;
+//				break;
+			}
+		}
+		return key;
 	}
 }
+

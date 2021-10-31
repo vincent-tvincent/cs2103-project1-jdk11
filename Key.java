@@ -66,12 +66,14 @@ public class Key {
 	public void paint (Graphics g) {
 		// TODO: Change this to handle the different key colors
 		// and different key states (pressed down or not).
-		if(_isWhite){
+		if (_isOn){
+			g.setColor(Color.GRAY);
+		}else if(_isWhite){
 			g.setColor(Color.WHITE);
 		}else{
 			g.setColor(Color.BLACK);
 		}
-		//ystem.out.println("color: " + g.getColor());
+
 		g.fillPolygon(_polygon);
 		g.setColor(Color.BLACK);
 		g.drawPolygon(_polygon);

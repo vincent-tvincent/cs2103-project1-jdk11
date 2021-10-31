@@ -100,14 +100,21 @@ public class Piano extends JPanel {
 		for(int counter = 0; counter < 7; counter++){
 			System.out.println("expected black key palce: " + start);
 			makeKey(start, pitch,true);
-			pitch++;
+			if(counter != 2 && counter != 6){
+				pitch += 2;
+			}else{
+				pitch++;
+			}
 			start += WHITE_KEY_WIDTH;
 		}
+		pitch = startPitch + 1;
 		start = startX;
 		for(int counter = 0; counter < 7; counter++){
 			if(counter != 2 && counter != 6){
 				makeKey(start, pitch, false);
-				pitch++;
+				pitch +=2;
+			}else{
+				pitch ++;
 			}
 			start += WHITE_KEY_WIDTH;
 		}
