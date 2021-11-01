@@ -94,11 +94,9 @@ public class Piano extends JPanel {
 	 * @param startPitch the int value to be used in makeOcative
 	 */
 	private void makeOcative(int startX,int startPitch){
-		System.out.println("ocative placed, start point x: " + startX);
 		int pitch = startPitch;
 		int start = startX;
 		for(int counter = 0; counter < 7; counter++){
-			System.out.println("expected black key palce: " + start);
 			makeKey(start, pitch,true);
 			if(counter != 2 && counter != 6){
 				pitch += 2;
@@ -130,16 +128,13 @@ public class Piano extends JPanel {
 	private void makeKey(int startX, int pitch, boolean isWhite){
 		int[] x;
 		int[] y;
-		System.out.println("is white?: " + isWhite);
 		if(isWhite){
 			x = new int[]{startX, startX + WHITE_KEY_WIDTH, startX + WHITE_KEY_WIDTH, startX};
 			y = new int[]{0, 0, WHITE_KEY_HEIGHT, WHITE_KEY_HEIGHT};
-			System.out.println("white key: " + x[0] + ' ' + x[1]);
 		}else{
 			x = new int[]{startX + WHITE_KEY_WIDTH - BLACK_KEY_WIDTH/2, startX + WHITE_KEY_WIDTH + BLACK_KEY_WIDTH/2,
 					startX + WHITE_KEY_WIDTH + BLACK_KEY_WIDTH/2, startX + WHITE_KEY_WIDTH - BLACK_KEY_WIDTH/2};
 			y = new int[]{0,0,BLACK_KEY_HEIGHT, BLACK_KEY_HEIGHT};
-			System.out.println("black key: " + x[0] + ' ' + x[1]);
 		}
 		Polygon block = new Polygon(x, y,x.length);
 		Key key = new Key(block,isWhite,pitch,this);

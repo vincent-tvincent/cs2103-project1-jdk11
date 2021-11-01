@@ -14,6 +14,7 @@ public class Key {
 	private boolean _isOn;
 	private Piano _piano;
 	private boolean _isWhite;
+
 	/**
 	 * Returns the polygon associated with this key.
 	 * @return the polygon associated with this key.
