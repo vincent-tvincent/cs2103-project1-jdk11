@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import java.awt.event.*;
 import javax.sound.midi.*;
 
 /**
@@ -82,7 +81,7 @@ public class Piano extends JPanel {
 		int X = 0;
 		int startPitch = START_PITCH;
 		for(int counter = 0; counter < 3; counter++){
-			makeOcative(X,startPitch);
+			makeOctave(X,startPitch);
 			X += 7  * WHITE_KEY_WIDTH;
 			startPitch += 12;
 		}
@@ -93,7 +92,7 @@ public class Piano extends JPanel {
 	 * @param startX the int value to be used in makeOcative
 	 * @param startPitch the int value to be used in makeOcative
 	 */
-	private void makeOcative(int startX,int startPitch){
+private void makeOctave(int startX, int startPitch){
 		int pitch = startPitch;
 		int start = startX;
 		for(int counter = 0; counter < 7; counter++){

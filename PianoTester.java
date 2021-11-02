@@ -44,6 +44,26 @@ class PianoTester {
 		assertEquals(1, _receiver.getKeyOnCount(Piano.START_PITCH));
 
 	}
+	@Test
+	void testOctavesFormat(){
+		MouseEvent click;
+		boolean result = true;
+		int pitch = 48;
+		for(int i = 20; i < 240; i += 40){
+			click = makeMouseEvent(i, 110);
+			_mouseListener.mousePressed(click);
+			if(!_receiver.isKeyOn(pitch)){
+				result = false;
+				break;
+			}
+			if(pitch == 52){
+				pitch ++;
+			}else{
+				pitch += 2;
+			}
+		}
+		assertTrue(result);
+	}
 
 	// TODO write at least 3 more tests!
 	@Test
