@@ -73,4 +73,10 @@ class PianoTester {
 		}
 		assertTrue(result);
 	}
+
+	@Test
+	void testBlackKeyLengths(){
+		_mouseListener.mousePressed(makeMouseEvent(21,110));
+		assertTrue(_receiver.isKeyOn(48));
+	}
 }
