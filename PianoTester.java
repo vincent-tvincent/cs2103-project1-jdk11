@@ -44,6 +44,15 @@ class PianoTester {
 		assertEquals(1, _receiver.getKeyOnCount(Piano.START_PITCH));
 
 	}
+
+	// TODO write at least 3 more tests!
+	@Test
+	void testClickUpperRightMostPixel () {
+		// Pressing the mouse should cause the key to turn on.
+		_mouseListener.mousePressed(makeMouseEvent(839, 0));
+		assertTrue(_receiver.isKeyOn(Piano.START_PITCH + 35));
+	}
+
 	@Test
 	void testOctavesFormat(){
 		MouseEvent click;
@@ -63,13 +72,5 @@ class PianoTester {
 			}
 		}
 		assertTrue(result);
-	}
-
-	// TODO write at least 3 more tests!
-	@Test
-	void testClickUpperRightMostPixel () {
-		// Pressing the mouse should cause the key to turn on.
-		_mouseListener.mousePressed(makeMouseEvent(839, 0));
-		assertTrue(_receiver.isKeyOn(Piano.START_PITCH + 35));
 	}
 }
